@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "1028398154245",
+    "firebase_url": "https://modern-college-admin-af25e-default-rtdb.firebaseio.com",
+    "project_id": "modern-college-admin-af25e",
+    "storage_bucket": "modern-college-admin-af25e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1028398154245:android:5b373d625e0e12d988526c",
+        "android_client_info": {
+          "package_name": "com.example.adminapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvFngCtcqF86KTr6BySMNzH1FBK7zPgtI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1028398154245:android:1c319da9fe9993c588526c",
+        "android_client_info": {
+          "package_name": "com.example.collegeapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvFngCtcqF86KTr6BySMNzH1FBK7zPgtI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

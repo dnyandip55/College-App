@@ -5,4 +5,18 @@
     <string name="light" tools:ignore="ReferenceType">@font/latolight</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="navigation_drawer_open">start</string>
+    <string name="navigation_drawer_close">close</string>
+    <string name="about_college">The college was founded by Progressive Education Society, in 1970. The college is permanently affiliated to the Savitribai Phule Pune University, Ganeshkhind, Pune 411007. The college provides various academic amenities so as to attain Bachelors, Masters and Ph. D degrees in the fields of Arts, Science, Commerce. The college is a reputed educational institution, which has been known for producing outstanding students who take on different careers, as per their academic merit, successfully in the society. Savitribai Phule Pune University has awarded Best College Award to the college in 2008.
+
+The college not only ensures the academic development of the students but also provides them with opportunities to prove themselves by means of extra-curricular and co-curricular activities. Moreover, in the field of Sports, the college has made a name for itself. So far 30 students of the college have won prestigious Shri. Shiv Chhatrapati Award. The College has a well-equipped gymnasium by which the students are benefited. The Art circle of the college works hard for the promotion of cultural activities. The Career Guidance Centre makes its presence felt by providing necessary information and guidance to the students as and when required. The record of achievements of the college clearly indicates that the college has firmly established itself as a Modern and Progressive educational institute. The College is re-accredited by NAAC, Bangalore, with A+ Grade  in 2017. The college has been awarded unique status of College with Potential for Excellence (CPE) by UGC, New Delhi in 2011 continuation of CPE in 2017. The college has also received Basic Scientific Research (BSR) grant from UGC. It is also funded by DST, New Delhi, under Fund for Improvement of Science and Technology Infrastructure (FIST) scheme. Recently, DBT, Govt. of India, has sanctioned Star College Scheme to our college.</string>
+
+    <string name="college_name">Progressive Education Societys Modern College of Arts ,Science and Commerce (Autonomous) Pune</string>
+    <string name="info">Progressive Education Society is a  reputated  and distinguished  educational  institution  in Maharashtra</string>
+    <string name="email">hodcompsci@moderncollegepune.edu.in</string>
+    <string name="phone">(+9120) 25535468</string>
+    <string name="college_app">College App</string>
+    <string name="dnyandip_jadhav">Dnyandip Jadhav</string>
+
 </resources>

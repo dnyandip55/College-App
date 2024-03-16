@@ -3,13 +3,196 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment"
-    android:background="@color/red">
+    tools:context=".ui.home.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/image_slider"
+                android:layout_width="wrap_content"
+                android:layout_height="300dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="The GPT Tale"
+                android:fontFamily="@string/bold"
+                android:textColor="@color/textColor"
+                android:layout_gravity="center_horizontal"
+                android:textSize="@dimen/title_size"
+                android:layout_marginTop="36dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="@dimen/text_margin"
+                android:layout_marginTop="@dimen/text_margin"
+                android:fontFamily="@string/light"
+                android:text="@string/about_college"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/text_size" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:background="@color/darkColor">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="36dp"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Departments"
+                        android:fontFamily="@string/bold"
+                        android:textColor="@color/white"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="@dimen/title_size"
+                        android:layout_marginTop="@dimen/text_margin"/>
+                    
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:background="@color/white">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginHorizontal="@dimen/text_margin"
+                                android:layout_marginTop="@dimen/text_margin"
+                                android:fontFamily="@string/light"
+                                android:text="Computer Science"
+                                android:textColor="@color/textColor"
+                                android:textSize="@dimen/text_size"
+                                android:layout_margin="8dp"/>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/grey"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginHorizontal="@dimen/text_margin"
+                                android:layout_marginTop="@dimen/text_margin"
+                                android:fontFamily="@string/light"
+                                android:text="English"
+                                android:textColor="@color/textColor"
+                                android:textSize="@dimen/text_size"
+                                android:layout_margin="8dp"/>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/grey"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginHorizontal="@dimen/text_margin"
+                                android:layout_marginTop="@dimen/text_margin"
+                                android:fontFamily="@string/light"
+                                android:text="History"
+                                android:textColor="@color/textColor"
+                                android:textSize="@dimen/text_size"
+                                android:layout_margin="8dp"/>
+
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/text_margin">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Contact Details"
+                    android:fontFamily="@string/bold"
+                    android:textColor="@color/textColor"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="@dimen/title_size"
+                    android:layout_marginTop="@dimen/text_margin"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/text_margin"
+                    android:layout_marginTop="@dimen/text_margin"
+                    android:fontFamily="@string/light"
+                    android:text="@string/college_name"
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/text_size" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/text_margin"
+                    android:layout_marginTop="@dimen/text_margin"
+                    android:fontFamily="@string/light"
+                    android:text="@string/info"
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/text_size" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginHorizontal="@dimen/text_margin"
+                    android:layout_marginTop="@dimen/text_margin"
+                    android:fontFamily="@string/light"
+                    android:text="@string/email"
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/text_size" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/text_margin"
+                    android:layout_marginTop="@dimen/text_margin"
+                    android:fontFamily="@string/light"
+                    android:text="@string/phone"
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/text_size" />
+                
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="230dp"
+                    android:src="@drawable/college_location"
+                    android:id="@+id/map"
+                    />
+
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </FrameLayout>
