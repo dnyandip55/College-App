@@ -19,4 +19,58 @@ The college not only ensures the academic development of the students but also p
     <string name="college_app">College App</string>
     <string name="dnyandip_jadhav">Dnyandip Jadhav</string>
 
+    <string name="computer_science">Our students are in the field of Computer Science and Applications. Their entry for the course is on the basis of merit. At the undergraduate level their performance at HSC (Science) with mathematics as compulsory subject is the criteria for the admission. At the postgraduate level their performance at the B.Sc. (Computer Science) degree and performance of the entrance examination is the criterion for the admission for the M.Sc. (Computer Science) course. Recently, University of Pune and Govt. of Maharashtra has accorded permission to start B.Sc.(Animation) course.</string>
+    <string name="chem_desc">The Department of Chemistry of this college has been established in 1970. The department is in function of running 11th, 12th, Under graduate (B.Sc) and Post Graduate (M.Sc. Analytical Chemistry) courses. Most of the faculties from senior wing are Ph. D. and remaining teachers are also pursuing it from various prestigious research centres. The department is fully equipped with instruments, equipments and departmental books library to study the Chemistry in more effective manner at Jr, UG and PG levels. Along with theory and practical classes,
+        there are extra activities conducted by department for true benefit of students such as; seminars, group discussions, live demonstrations, industrial visits, guest lectures etc. The department also organizes the campus placement campaigns for PG students and many students have got the job opportunities in various multinational companies like Galaxy Surfactants Ltd., Lupin Pharmaceuticals Ltd., Sai Advantium Ltd., ITC group etc.</string>
+    <string name="comp_desc">"Our students are in the field of Computer Science and Applications. Their entry for the course is on the basis of merit. At the undergraduate level their performance at HSC (Science) with mathematics as compulsory subject is the criteria for the admission. At the postgraduate level their performance at the B.Sc. (Computer Science) degree and performance of the entrance examination is the criterion for the admission for the M.Sc. (Computer Science) course. Recently, University of Pune and Govt. of Maharashtra has accorded permission to start B.Sc.(Animation) course.
+
+        We are proud that the students opt for our centre with highest priority. As a result, the students of Modern College, Shivajinagar, Pune-5 are at the forefront in the IT field. During their graduate and postgraduate studies they undertake the projects which are relevant to the current Industrial needs. These projects have helped students to apply their theoretical knowledge to the real life situation.
+    </string>
+
+    <string name="electronic_science_desc">
+        The department of Electronic Science was formally established as separate department from June 1994. Earlier it was a part of Physics department. Modern college was the first among few colleges in Pune University to start Electronic Science as a separate discipline in 1985, when University introduced this subject.
+
+It now runs Junior, Senior, Post Graduate courses and Post Graduate Research Center. The department also shoulders responsibility of teaching to Bachelor of Science in Computer (B.Sc. Computer Science) students (A Non-grant course). Our teachers are contributing teaching for M.Sc. Computer Science course as well. As the subject is recent, most of the staff members of the department are quite young and ready to learn new topics and recent advances in the subject. Staff and students took various interdisciplinary projects in the subject .This gives us opportunity to interact with other departments like, Botany, Physics, Chemistry and Computer Science.
+    </string>
+    <string name="physics_desc">
+        The department of Physics is one of the largest and oldest departments in Modern College. The department of Physics was instituted from the inception of the college in June 1970. Physics as principal subject was started from June 1973. It offers courses at the Undergraduate and Post-graduate levels. The Undergraduate centre offers Material Science, Instrumentation, Advanced Electronics, Nanotechnology, Astrophysics as elective courses at UG level.
+
+The Post-Graduate centre offers Electronics, Energy Studies, Instrumentation as elective courses at PG level. Presently department has 7 full time members for UG teaching and 3 full time faculty members for PG teaching.
+    </string>
+    <string name="statistics_desc">
+
+        Statistics Department established in 1970’s as Mathematics and Statistics department. Department established as a separate statistics department in 1979. It is the first college in Pune University with statistics special at M.Com. Level started in 1979. In department B.Sc. with statistics special started in 1979. The statistical Department is one of the departments in college which has teaching programme of statistics at principal level for B.Sc. and at special level for B.com and M.com. for more than 35 years. It has well equipped laboratories and an enthusiastic qualified staff member.The department has made significant progress and it undertakes several activities. Many outstanding students have been produced by the department. Modern college first college in Maharashtra to start M.Sc. Statistics in 2009.We conduct M.Sc. programme for last 6 years. We have celebrated 2013 as international statistics years by holding workshop and releasing calendar consists of eminent statistician’s information. We have conducted several seminars on statistics. We are conducting various students’ activities such as quiz, poster competition and problem corner. SAS software Training programme is conducted for M.Sc. Students
+    </string>
+    <string name="math_desc">
+        The Progressive Education Society’s Modern College of Arts, Science and Commerce, Shivajinagar, Pune-5 was started by the initiative of honourable Tatake Sir in June 1970. Prof. Limaye was first Principal of the college. For the first ten years, there was a combined Department of Mathematics and Statistics, headed by Prof. P.S. Chirputkar. Department of Mathematics started functioning independently in 1981 and late Prof. C.G. Kulkarni was the first head of the Department. Prof. Pramila P. Chikate became head of the Department after the voluntary retirement of Prof. C.G. Kulkarni in June 1989.  Prof. A. V. Rayarikar shouldered the responsibility of the head of the Department from 2004 and after his retirement in 2010, Prof. D.S. Mane remained the head of Department till 2014. Dr. A. N. Bhavale is appointed as the Head of Department of Mathematics since June 2015.
+
+From the academic year 2014-2015, the Department has started Post-Graduate Course (M.Sc.) in Mathematics. In the Department, there are in all seven staff members on full time basis in the Senior wing, six staff members in the Junior wing and eight staff members in the Post-Graduate wing. One non teaching staff is also available in the Department
+    </string>
+    <string name="microbiology_desc">
+        Microbiology is study of microorganisms and is one of the significant branches of sciences to understand the principles of life which has roots in the study of various microbial systems. Though it is a basic science, it is multidisciplinary as well. Its various branches such as Medical Microbiology, Immunology, Biochemistry, Genetics, Molecular Biology, Virology, Air -, Water -, Soil -, Agriculture -, Food -, Dairy, Space Microbiology, Biotechnology, Fermentation Technology etc. has never ending impact on human life and making earth a better place to live.
+
+Department of Microbiology was established in 2005. The undergraduate course was started in 2005 and postgraduate course was started in 2006. The department envisions creating skilled human resource in the field of Microbiology.
+
+It is recognized by Savitribai Phule Pune University as a Research Center in Microbiology for M. Phil. Skill development course entitled ‘Pharmaceutical Techniques’ and various co-curricular activities are conducted for enhancing overall progress of students.
+    </string>
+    <string name="animation_desc">
+        Department of Animation is established in the Academic Year 2019-20 asa separate Department. Initially it was under the Department of Computer Science. The course run by the department is B.Sc. Animation which is 3 years degree course started by Savitribai Phule Pune University in the Academic Year 2012-13 and in Modern College in the year 2013-14. Since the first batch passed out of B.Sc. Animation, it’s a history to achieve 100% result till academic year 2018-19. Under autonomous status the department has started M.Sc. Animation course from the Academic Year 2020- 21. UGC NSDC has sanctioned B.Voc. Animator (3D Animation and VFX), 3 years degree course.
+        Technical Support
+The Department of Animation provides technical support to the various events and programs carried out throughout the year. This includes audio-visual presentation, live video coverage through the Modern Media Station Youtube channel and other technical assistance.
+    </string>
+    <string name="biotechnology_desc">
+        Biotechnology is one of the interdisciplinary branches of Life Science which blend in living systems comprises animals, plants and microbes.
+
+Keeping in view outlay and applications of biotechnology in every field to accomplish the eternal demand for resource personnel with specialization in biotechnology, the college established Department of Biotechnology in 2005. The Department offers both B.Sc. and M.Sc. courses in Biotechnology affiliated to Savitribai Phule Pune University.
+
+It has upright position in the student community for its high quality education and advanced facilities. Out of nine highly qualified staff members six have doctoral degree and two have registered for Ph.D. The faculty is involved in diverse research areas such as Enzymology, Medical Biochemistry, Nano-biotechnology, Medical Microbiology, Microbial Biotechnology, Molecular Biology, Plant Biotechnology and Biodiversity resulting in national and international publications.
+    </string>
+    <string name="botany_desc">
+        Department of Botany was established in 1971 with Botany as Graduate course under the leadership of Dr A K Pande. The Post graduate Department was established in 1993 .The Botany department was granted recognized research center in 1984. The area of Botany department is 4400 sq. feet and has 4 laboratories including research laboratory and plant tissue culture laboratory. The departmental library has more than 300 books. The labs are equipped with LCDs, and OHPs. Botanical garden is well maintained by the department with shade net house and medicinal plants.
+
+The Botany department also conducts skill development courses in Plant Tissue Culture, Seed Technology, and Ayurvedic Medicines  Herbal Product Preparation.
+
+The objective of the Department of Botany has been to impart quality education to students at Junior, Senior, Post-graduate, Doctoral Research and Post Doctoral Research levels
+    </string>
+
 </resources>

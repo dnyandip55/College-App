@@ -1,5 +1,6 @@
 package com.example.collegeapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -15,6 +16,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.collegeapp.ebook.EbookActivity;
 import com.example.collegeapp.ui.about.AboutFragment;
 import com.example.collegeapp.ui.faculty.FacultyFragment;
 import com.example.collegeapp.ui.gallery.GalleryFragment;
@@ -76,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             // Handle video lectures navigation
             Toast.makeText(this,"Video",Toast.LENGTH_SHORT).show();
         } else if (itemId == R.id.navigation_ebook) {
-            Toast.makeText(this,"ebook",Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this,EbookActivity.class));
             // Handle ebooks navigation
         } else if (itemId == R.id.navigation_website) {
             Toast.makeText(this,"website",Toast.LENGTH_SHORT).show();
@@ -93,5 +95,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         return true;
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }
+        else{
+            super.onBackPressed();
+        }
+
     }
 }

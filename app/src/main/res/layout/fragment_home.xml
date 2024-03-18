@@ -23,7 +23,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="The GPT Tale"
+                android:text="ABOUT"
                 android:fontFamily="@string/bold"
                 android:textColor="@color/textColor"
                 android:layout_gravity="center_horizontal"
@@ -97,7 +97,7 @@
                                 android:layout_marginHorizontal="@dimen/text_margin"
                                 android:layout_marginTop="@dimen/text_margin"
                                 android:fontFamily="@string/light"
-                                android:text="English"
+                                android:text="Chemistry"
                                 android:textColor="@color/textColor"
                                 android:textSize="@dimen/text_size"
                                 android:layout_margin="8dp"/>
@@ -112,10 +112,117 @@
                                 android:layout_marginHorizontal="@dimen/text_margin"
                                 android:layout_marginTop="@dimen/text_margin"
                                 android:fontFamily="@string/light"
-                                android:text="History"
+                                android:text="Electronic Science"
                                 android:textColor="@color/textColor"
                                 android:textSize="@dimen/text_size"
                                 android:layout_margin="8dp"/>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/grey"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginHorizontal="@dimen/text_margin"
+                                android:layout_marginTop="@dimen/text_margin"
+                                android:fontFamily="@string/light"
+                                android:text="Physics"
+                                android:textColor="@color/textColor"
+                                android:textSize="@dimen/text_size"
+                                android:layout_margin="8dp"/>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/grey"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginHorizontal="@dimen/text_margin"
+                                android:layout_marginTop="@dimen/text_margin"
+                                android:fontFamily="@string/light"
+                                android:text="Statistics"
+                                android:textColor="@color/textColor"
+                                android:textSize="@dimen/text_size"
+                                android:layout_margin="8dp"/>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/grey"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginHorizontal="@dimen/text_margin"
+                                android:layout_marginTop="@dimen/text_margin"
+                                android:fontFamily="@string/light"
+                                android:text="Mathematics"
+                                android:textColor="@color/textColor"
+                                android:textSize="@dimen/text_size"
+                                android:layout_margin="8dp"/>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/grey"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginHorizontal="@dimen/text_margin"
+                                android:layout_marginTop="@dimen/text_margin"
+                                android:fontFamily="@string/light"
+                                android:text="Microbiology"
+                                android:textColor="@color/textColor"
+                                android:textSize="@dimen/text_size"
+                                android:layout_margin="8dp"/>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/grey"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginHorizontal="@dimen/text_margin"
+                                android:layout_marginTop="@dimen/text_margin"
+                                android:fontFamily="@string/light"
+                                android:text="Animation"
+                                android:textColor="@color/textColor"
+                                android:textSize="@dimen/text_size"
+                                android:layout_margin="8dp"/>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/grey"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginHorizontal="@dimen/text_margin"
+                                android:layout_marginTop="@dimen/text_margin"
+                                android:fontFamily="@string/light"
+                                android:text="Biotechnology"
+                                android:textColor="@color/textColor"
+                                android:textSize="@dimen/text_size"
+                                android:layout_margin="8dp"/>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/grey"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginHorizontal="@dimen/text_margin"
+                                android:layout_marginTop="@dimen/text_margin"
+                                android:fontFamily="@string/light"
+                                android:text="Botany"
+                                android:textColor="@color/textColor"
+                                android:textSize="@dimen/text_size"
+                                android:layout_margin="8dp"/>
+
+
 
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>

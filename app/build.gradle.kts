@@ -59,6 +59,11 @@ dependencies {
 
     implementation("com.google.firebase:firebase-database:20.3.1")
 
+    //dependency for zoom in image
+    implementation("com.github.chrisbanes:PhotoView:2.3.0")
+
+
+
 
 
 

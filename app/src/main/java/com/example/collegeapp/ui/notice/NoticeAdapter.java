@@ -1,6 +1,7 @@
 package com.example.collegeapp.ui.notice;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.collegeapp.FullImageView;
 import com.example.collegeapp.R;
 import com.squareup.picasso.Picasso;
 
@@ -46,62 +49,16 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
             holder.NoticeImage.setImageResource(R.drawable.placeholder_image);
         }
 
-//        holder.deleteNotice.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                // Build AlertDialog to confirm deletion
-//                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-//                builder.setMessage("Are you sure you want to delete this notice?");
-//                builder.setCancelable(true);
-//                builder.setPositiveButton(
-//                        "OK",
-//                        new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                // Perform deletion when user confirms
-//                                deleteNotice(position);
-//                            }
-//                        }
-//                );
-//                // Set negative button to cancel
-//                builder.setNegativeButton(
-//                        "Cancel",
-//                        new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                dialogInterface.cancel();
-//                            }
-//                        }
-//                );
-//
-//                // Show AlertDialog
-//                AlertDialog alertDialog = builder.create();
-//                alertDialog.show();
-//            }
-//        });
+        holder.NoticeImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(context, FullImageView.class);
+                intent.putExtra("image",currentItem.getImage());
+                context.startActivity(intent);
+            }
+        });
     }
 
-    // Method to delete notice from Firebase and RecyclerView
-//    private void deleteNotice(int position) {
-//        if (position != RecyclerView.NO_POSITION) {
-//            NoticeData currentItem = list.get(position);
-//            DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Notice");
-//            reference.child(currentItem.getKey()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-//                @Override
-//                public void onComplete(@NonNull Task<Void> task) {
-//                    // Remove the item from the list and notify adapter
-//                    list.remove(position);
-//                    notifyItemRemoved(position);
-//                    Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show();
-//                }
-//            }).addOnFailureListener(new OnFailureListener() {
-//                @Override
-//                public void onFailure(@NonNull Exception e) {
-//                    Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show();
-//                }
-//            });
-//        }
-//    }
 
     @Override
     public int getItemCount() {
