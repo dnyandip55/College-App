@@ -11,5 +11,8 @@
     <color name="red">#FB0303</color>
     <color name="orange">#FF5722</color>
     <color name="darkColor">#313131</color>
+    <color name="purple_700">#7B1FA2</color>
+    <color name="light_gray">#D3D3D3</color>
+    <color name="purple_500">#9C27B0</color>
 
 </resources>

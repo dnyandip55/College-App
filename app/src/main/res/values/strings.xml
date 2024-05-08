@@ -72,5 +72,8 @@ The Botany department also conducts skill development courses in Plant Tissue Cu
 
 The objective of the Department of Botany has been to impart quality education to students at Junior, Senior, Post-graduate, Doctoral Research and Post Doctoral Research levels
     </string>
+    <string name="loading">Loading...</string>
+    <string name="registered_user_since">registered user since</string>
+    <string name="user_display_picture">user display picture</string>
 
 </resources>

@@ -37,7 +37,7 @@ dependencies {
 
     //noinspection GradleCompatible
     implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.11.0")
+    implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.navigation:navigation-fragment:2.7.7")
     implementation("androidx.navigation:navigation-ui:2.7.7")
@@ -47,7 +47,7 @@ dependencies {
 
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
-    implementation("com.google.android.material:material:1.11.0")
+    implementation("com.google.android.material:material:1.12.0")
     implementation("com.github.denzcoskun:ImageSlideshow:0.1.2")
 
     implementation(platform("com.google.firebase:firebase-bom:32.7.4"))
@@ -57,10 +57,15 @@ dependencies {
     implementation ("com.github.bumptech.glide:glide:4.16.0")
 
 
-    implementation("com.google.firebase:firebase-database:20.3.1")
+    implementation("com.google.firebase:firebase-database:21.0.0")
+    implementation("com.google.firebase:firebase-auth:23.0.0")
 
     //dependency for zoom in image
     implementation("com.github.chrisbanes:PhotoView:2.3.0")
+
+
+    //swipe refresh layout
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
 
 

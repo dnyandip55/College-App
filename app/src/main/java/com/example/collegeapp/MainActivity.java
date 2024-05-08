@@ -17,6 +17,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.collegeapp.ebook.EbookActivity;
+import com.example.collegeapp.profile.UserProfileActivity;
 import com.example.collegeapp.ui.about.AboutFragment;
 import com.example.collegeapp.ui.faculty.FacultyFragment;
 import com.example.collegeapp.ui.gallery.GalleryFragment;
@@ -89,9 +90,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (itemId == R.id.navigation_rate) {
             Toast.makeText(this,"rate us",Toast.LENGTH_SHORT).show();
             // Handle rate action
-        } else if (itemId == R.id.navigation_developer) {
-            Toast.makeText(this,"developer",Toast.LENGTH_SHORT).show();
+        } else if (itemId == R.id.navigation_profile) {
+            Toast.makeText(this,"profile",Toast.LENGTH_SHORT).show();
             // Handle developer info
+            startActivity(new Intent(this, UserProfileActivity.class));
         }
 
         return true;
