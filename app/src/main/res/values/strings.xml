@@ -75,5 +75,7 @@ The objective of the Department of Botany has been to impart quality education t
     <string name="loading">Loading...</string>
     <string name="registered_user_since">registered user since</string>
     <string name="user_display_picture">user display picture</string>
+    <string name="update_email_u">UPDATE EMAIL</string>
+    <string name="upload_pic_u">UPLOAD PROFILE PIC</string>
 
 </resources>

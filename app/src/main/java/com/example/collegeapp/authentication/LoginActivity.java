@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.collegeapp.MainActivity;
 import com.example.collegeapp.R;
+import com.example.collegeapp.profile.ForgotPasswordActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseNetworkException;
@@ -51,6 +52,18 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+        //set up forgot password link
+
+        TextView forgotPasswordLinkTextView=findViewById(R.id.textView_forgot_password_link);
+        forgotPasswordLinkTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(LoginActivity.this, "You can reset your password now", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
+            }
+        });
         // Initialize Firebase Auth
         authProfile = FirebaseAuth.getInstance();
         ImageView imageViewShowHidePwd=findViewById(R.id.imageView_show_hide_pwd);
@@ -72,6 +85,8 @@ public class LoginActivity extends AppCompatActivity {
         editTextLoginEmail = findViewById(R.id.editText_login_email);
         editTextLoginPwd = findViewById(R.id.editText_login_pwd);
         progressBar = findViewById(R.id.progressBar);
+
+
 
         Button buttonLogin = findViewById(R.id.button_login);
         buttonLogin.setOnClickListener(new View.OnClickListener() {
@@ -177,19 +192,19 @@ public class LoginActivity extends AppCompatActivity {
 
     }
   //  check if user is already logged in , in such case straightway take the user to the MainActivity
-  //  @Override
-//    protected void onStart() {
-//        super.onStart();
-//        if(authProfile.getCurrentUser() !=null){
-//            Toast.makeText(LoginActivity.this,"Already Logged In !",Toast.LENGTH_SHORT).show();
-//            //Start user profile activity
-//            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//            startActivity(intent);
-//            finish();
-//
-//        }else{
-//            Toast.makeText(LoginActivity.this,"You can login now",Toast.LENGTH_SHORT).show();
-//        }
-//    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(authProfile.getCurrentUser() !=null){
+            Toast.makeText(LoginActivity.this,"Already Logged In !",Toast.LENGTH_SHORT).show();
+            //Start user profile activity
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+
+        }else{
+            Toast.makeText(LoginActivity.this,"You can login now",Toast.LENGTH_SHORT).show();
+        }
+    }
 
 }

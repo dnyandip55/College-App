@@ -11,22 +11,15 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.collegeapp.ebook.EbookActivity;
 import com.example.collegeapp.profile.UserProfileActivity;
-import com.example.collegeapp.ui.about.AboutFragment;
-import com.example.collegeapp.ui.faculty.FacultyFragment;
-import com.example.collegeapp.ui.gallery.GalleryFragment;
-import com.example.collegeapp.ui.home.HomeFragment;
-import com.example.collegeapp.ui.notice.NoticeFragment;
+import com.example.collegeapp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
-
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -91,7 +84,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Toast.makeText(this,"rate us",Toast.LENGTH_SHORT).show();
             // Handle rate action
         } else if (itemId == R.id.navigation_profile) {
-            Toast.makeText(this,"profile",Toast.LENGTH_SHORT).show();
             // Handle developer info
             startActivity(new Intent(this, UserProfileActivity.class));
         }
@@ -106,7 +98,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawerLayout.closeDrawer(GravityCompat.START);
         }
         else{
+            // Call super to execute default behavior (closing the activity)
             super.onBackPressed();
+
+            finish();
         }
 
     }

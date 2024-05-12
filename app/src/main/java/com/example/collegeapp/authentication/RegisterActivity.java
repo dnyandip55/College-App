@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -35,6 +37,9 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        getSupportActionBar().setTitle("Register");
+        Toast.makeText(RegisterActivity.this, "You can register now " , Toast.LENGTH_SHORT).show();
+
 
         progressBar = findViewById(R.id.progressBar);
         editTextRegisterFullName = findViewById(R.id.editText_register_full_name);
@@ -43,6 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
         editTextRegisterMobile = findViewById(R.id.editText_register_mobile);
         editTextRegisterPwd = findViewById(R.id.editText_register_password);
         radioGroupRegisterGender = findViewById(R.id.radio_group_register_gender);
+        radioGroupRegisterGender.clearCheck();
 
         // Setting up DatePicker on EditText for date of birth
         editTextRegisterDoB.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +80,8 @@ public class RegisterActivity extends AppCompatActivity {
                 String password = editTextRegisterPwd.getText().toString();
                 String gender = ((RadioButton) findViewById(radioGroupRegisterGender.getCheckedRadioButtonId())).getText().toString();
 
+                
+                
                 if (validateInputs(fullName, email, dob, mobile, password, gender)) {
                     progressBar.setVisibility(View.VISIBLE);
                     registerUser(fullName, email, dob, mobile, password, gender);
@@ -83,9 +91,55 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private boolean validateInputs(String fullName, String email, String dob, String mobile, String password, String gender) {
-        // Add validation logic here
-        // Return true if inputs are valid, otherwise show error messages and return false
-        return true;
+        // Check if any field is empty
+        if (TextUtils.isEmpty(fullName)) {
+            Toast.makeText(RegisterActivity.this, "Please enter your full name", Toast.LENGTH_LONG).show();
+            editTextRegisterFullName.setError("Full name is required");
+            editTextRegisterFullName.requestFocus();
+            return false;
+        } else if (TextUtils.isEmpty(email)) {
+            Toast.makeText(RegisterActivity.this, "Please enter your email", Toast.LENGTH_LONG).show();
+            editTextRegisterEmail.setError("Email is required");
+            editTextRegisterEmail.requestFocus();
+            return false;
+        }else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(RegisterActivity.this, "Please re- enter your email", Toast.LENGTH_LONG).show();
+            editTextRegisterEmail.setError("valid email is required");
+            editTextRegisterEmail.requestFocus();
+            return false;
+        } else if (TextUtils.isEmpty(dob)) {
+            Toast.makeText(RegisterActivity.this, "Please enter your date of birth", Toast.LENGTH_LONG).show();
+            editTextRegisterDoB.setError("Date of birth is required");
+            editTextRegisterDoB.requestFocus();
+            return false;
+        } else if (TextUtils.isEmpty(mobile)) {
+            Toast.makeText(RegisterActivity.this, "Please enter your mobile number", Toast.LENGTH_LONG).show();
+            editTextRegisterMobile.setError("Mobile number is required");
+            editTextRegisterMobile.requestFocus();
+            return false;
+        } else if (mobile.length()!=10) {
+            Toast.makeText(RegisterActivity.this, "Please re-enter your mobile number", Toast.LENGTH_LONG).show();
+            editTextRegisterMobile.setError("Mobile number should be 10 digits");
+            editTextRegisterMobile.requestFocus();
+            return false;
+        }else if (TextUtils.isEmpty(password)) {
+            Toast.makeText(RegisterActivity.this, "Please enter your password", Toast.LENGTH_LONG).show();
+            editTextRegisterPwd.setError("Password is required");
+            editTextRegisterPwd.requestFocus();
+            return false;
+        } else if (TextUtils.isEmpty(gender)) {
+            // This should never happen if radio buttons are properly configured
+            Toast.makeText(RegisterActivity.this, "Please select your gender", Toast.LENGTH_LONG).show();
+            return false;
+        } else if (password.length() < 6) {
+            Toast.makeText(RegisterActivity.this, "Password must be at least 6 characters long", Toast.LENGTH_LONG).show();
+            editTextRegisterPwd.setError("Password is too short");
+            editTextRegisterPwd.requestFocus();
+            return false;
+        } else {
+            // Additional validation if needed
+            return true;
+        }
     }
 
     private void registerUser(String fullName, String email, String dob, String mobile, String password, String gender) {
@@ -105,6 +159,8 @@ public class RegisterActivity extends AppCompatActivity {
                             Toast.makeText(RegisterActivity.this, "User registration Succesfull " , Toast.LENGTH_SHORT).show();
 
                             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_NEW_TASK);
+
                             startActivity(intent);
                             finish();
                         }
