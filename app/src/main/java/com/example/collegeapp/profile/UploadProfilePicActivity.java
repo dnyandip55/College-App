@@ -46,7 +46,7 @@ public class UploadProfilePicActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Upload Profile Picture");
         authProfile=FirebaseAuth.getInstance();
         firebaseUser =authProfile.getCurrentUser();
-        storageReference= FirebaseStorage.getInstance().getReference("DisplayPics");
+        storageReference= FirebaseStorage.getInstance().getReference("ProfilePic");
 
         Uri uri=firebaseUser.getPhotoUrl();
         progressBar=findViewById(R.id.progressBar);
@@ -82,7 +82,7 @@ public class UploadProfilePicActivity extends AppCompatActivity {
     private void uploadPic() {
         if(uriImage!=null){
             // Save the image with uid of the currently logged user
-            StorageReference fileReference=storageReference.child(authProfile.getCurrentUser().getUid()+""+getFileExtension(uriImage));
+            StorageReference fileReference=storageReference.child(authProfile.getCurrentUser().getUid()+"/profilepic."+getFileExtension(uriImage));
 
             // Upload image to storage
             fileReference.putFile(uriImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -157,7 +157,23 @@ public class UploadProfilePicActivity extends AppCompatActivity {
             startActivity(getIntent());
             finish();
             overridePendingTransition(0,0);
-        } else if (id==R.id.menu_log_out) {
+        } else if (id==R.id.menu_update_profile) {
+        Intent intent=new Intent(UploadProfilePicActivity.this, UpdateProfileActivity.class);
+        startActivity(intent);
+        finish();
+    } else if (id==R.id.menu_update_email) {
+            Intent intent=new Intent(UploadProfilePicActivity.this, UpdateEmailActivity.class);
+            startActivity(intent);
+            finish();
+        }else if (id==R.id.menu_change_password) {
+            Intent intent=new Intent(UploadProfilePicActivity.this, ChangePasswordActivity.class);
+            startActivity(intent);
+            finish();
+        }else if (id==R.id.menu_delete_profile) {
+            Intent intent=new Intent(UploadProfilePicActivity.this, DeleteProfileActivity.class);
+            startActivity(intent);
+            finish();
+        }else if (id==R.id.menu_log_out) {
             authProfile.signOut();
             Toast.makeText(UploadProfilePicActivity.this,"Logged Out",Toast.LENGTH_SHORT).show();
             Intent intent=new Intent(UploadProfilePicActivity.this, LoginActivity.class);

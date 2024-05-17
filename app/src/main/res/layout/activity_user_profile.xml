@@ -194,7 +194,7 @@
                         android:contentDescription="Gender"
                         android:layout_centerVertical="true"
                         android:layout_marginTop="20dp"
-                        android:background="@drawable/ic_gender"/>
+                        android:background="@drawable/ic_mobile"/>
 
                     <TextView
                         android:id="@+id/textView_show_gender"
@@ -228,7 +228,7 @@
                         android:layout_marginTop="20dp"
                         android:id="@+id/ic_mobile"
                         android:contentDescription="Mobile"
-                        android:background="@drawable/ic_mobile"/>
+                        android:background="@drawable/ic_gender"/>
 
                     <TextView
                         android:id="@+id/textView_show_mobile"

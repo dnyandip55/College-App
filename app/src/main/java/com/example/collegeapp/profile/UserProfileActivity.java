@@ -140,16 +140,26 @@ public class UserProfileActivity extends AppCompatActivity {
         int id=item.getItemId();
         if (id==R.id.menu_refresh){
             // Refresh Activity
-            startActivity(getIntent());
             finish();
+            startActivity(getIntent());
             overridePendingTransition(0,0);
         } else if (id==R.id.menu_update_profile) {
             Intent intent=new Intent(UserProfileActivity.this, UpdateProfileActivity.class);
             startActivity(intent);
-            finish();
 
+        } else if (id==R.id.menu_update_email) {
+            Intent intent=new Intent(UserProfileActivity.this, UpdateEmailActivity.class);
+            startActivity(intent);
 
-        } else if (id==R.id.menu_log_out) {
+        } else if (id==R.id.menu_change_password) {
+            Intent intent=new Intent(UserProfileActivity.this, ChangePasswordActivity.class);
+            startActivity(intent);
+
+        } else if (id==R.id.menu_delete_profile) {
+            Intent intent=new Intent(UserProfileActivity.this, DeleteProfileActivity.class);
+            startActivity(intent);
+
+        }else if (id==R.id.menu_log_out) {
             authProfile.signOut();
             Toast.makeText(UserProfileActivity.this,"Logged Out",Toast.LENGTH_SHORT).show();
             Intent intent=new Intent(UserProfileActivity.this, LoginActivity.class);
