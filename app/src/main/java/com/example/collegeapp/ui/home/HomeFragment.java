@@ -32,9 +32,11 @@ public class HomeFragment extends Fragment {
        View view= inflater.inflate(R.layout.fragment_home, container, false);
 
 
-        imageList.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/modern-college-admin-af25e.appspot.com/o/gallary%2F%5BB%40e771c4bjpg?alt=media&token=9e0d9c28-dff4-423e-aaee-ca0a08c02946", "The animal population decreased by 58 percent in 42 years.", ScaleTypes.CENTER_CROP));
-        imageList.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/modern-college-admin-af25e.appspot.com/o/gallary%2F%5BB%40623ebebjpg?alt=media&token=84985360-f6fb-491c-9a36-e83971dab222", "Elephants and tigers may become extinct.",ScaleTypes.CENTER_CROP));
-        imageList.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/modern-college-admin-af25e.appspot.com/o/gallary%2F%5BB%40bd2ea97jpg?alt=media&token=c06c1913-8698-4b32-b15e-d98473f615ab", "And people do that.",ScaleTypes.CENTER_CROP));
+        imageList.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/modern-college-admin-af25e.appspot.com/o/gallary%2F%5BB%40eb1f8b8jpg?alt=media&token=419ba810-9dbe-41d9-b51e-c6152fe3d01e", ".....", ScaleTypes.CENTER_INSIDE));
+        imageList.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/modern-college-admin-af25e.appspot.com/o/gallary%2F%5BB%40a5d84abjpg?alt=media&token=9d8f8f45-d30a-4ff5-b230-b9fb6075a5ee", "....",ScaleTypes.CENTER_INSIDE));
+        imageList.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/modern-college-admin-af25e.appspot.com/o/gallary%2F%5BB%40d8c6cdbjpg?alt=media&token=acc9e8d7-1138-4785-98bd-39896a6a130a", "And people do that.",ScaleTypes.CENTER_INSIDE));
+        imageList.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/modern-college-admin-af25e.appspot.com/o/gallary%2F%5BB%4080c6f87jpg?alt=media&token=eae4c77e-cd40-45c8-87d5-8799059d9438", "...",ScaleTypes.CENTER_INSIDE));
+        imageList.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/modern-college-admin-af25e.appspot.com/o/gallary%2F%5BB%4070dba14jpg?alt=media&token=6e32c93a-7c6e-483f-ad68-808c07b1fd7d", "...",ScaleTypes.CENTER_INSIDE));
 
 
 

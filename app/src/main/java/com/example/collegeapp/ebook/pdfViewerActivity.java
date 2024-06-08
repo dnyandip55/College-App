@@ -9,14 +9,13 @@ import android.webkit.WebViewClient;
 import com.example.collegeapp.R;
 
 public class pdfViewerActivity extends AppCompatActivity {
-    private String url;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pdf_viewer);
-        url = getIntent().getStringExtra("pdfUrl");
+        String url = getIntent().getStringExtra("pdfUrl");
 
         // Find the WebView in your layout
         WebView webView = findViewById(R.id.webView);
@@ -25,6 +24,7 @@ public class pdfViewerActivity extends AppCompatActivity {
         webView.getSettings().setJavaScriptEnabled(true);
 
         // Load the PDF URL into the WebView
+        assert url != null;
         webView.loadUrl(url);
 
         // Set a WebViewClient to handle page navigation within the WebView

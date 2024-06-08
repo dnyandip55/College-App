@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,8 +18,8 @@ import com.example.collegeapp.R;
 import java.util.List;
 
 public class EbookAdapter extends RecyclerView.Adapter<EbookAdapter.EbookViewHolder> {
-    private Context context;
-    private List<EbookData> list;
+    private final Context context;
+    private final List<EbookData> list;
 
     public EbookAdapter(Context context, List<EbookData> list) {
         this.context = context;
@@ -41,22 +40,16 @@ public class EbookAdapter extends RecyclerView.Adapter<EbookAdapter.EbookViewHol
         Log.d("EbookAdapter", "Name: " + ebook.getName());
 
         holder.ebookName.setText(ebook.getName());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(context,pdfViewerActivity.class);
-                intent.putExtra("pdfUrl",ebook.getPdfUrl());
-                context.startActivity(intent);
-            }
+        holder.itemView.setOnClickListener(view -> {
+            Intent intent=new Intent(context,pdfViewerActivity.class);
+            intent.putExtra("pdfUrl",ebook.getPdfUrl());
+            context.startActivity(intent);
         });
 
-        holder.ebookDownload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(ebook.getPdfUrl()));
-                context.startActivity(intent);
-            }
+        holder.ebookDownload.setOnClickListener(view -> {
+            Intent intent=new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(ebook.getPdfUrl()));
+            context.startActivity(intent);
         });
     }
 
@@ -66,9 +59,9 @@ public class EbookAdapter extends RecyclerView.Adapter<EbookAdapter.EbookViewHol
         return list.size();
     }
 
-    public class EbookViewHolder extends RecyclerView.ViewHolder {
-        private TextView ebookName;
-        private ImageView ebookDownload;
+    public static class EbookViewHolder extends RecyclerView.ViewHolder {
+        private final TextView ebookName;
+        private final ImageView ebookDownload;
 
         public EbookViewHolder(@NonNull View itemView) {
             super(itemView);

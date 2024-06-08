@@ -1,12 +1,11 @@
 package com.example.collegeapp.authentication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.collegeapp.MainActivity;
 import com.example.collegeapp.R;
@@ -29,21 +28,15 @@ public class Welcome extends AppCompatActivity {
         }
 
         Button buttonLogin=findViewById(R.id.button_login);
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(Welcome.this,LoginActivity.class);
-                startActivity(intent);
-            }
+        buttonLogin.setOnClickListener(view -> {
+            Intent intent=new Intent(Welcome.this,LoginActivity.class);
+            startActivity(intent);
         });
 
         TextView buttonRegister=findViewById(R.id.register);
-        buttonRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(Welcome.this,RegisterActivity.class);
-                startActivity(intent);
-            }
+        buttonRegister.setOnClickListener(view -> {
+            Intent intent=new Intent(Welcome.this,RegisterActivity.class);
+            startActivity(intent);
         });
     }
 }

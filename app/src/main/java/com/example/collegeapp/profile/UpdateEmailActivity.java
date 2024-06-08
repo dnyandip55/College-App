@@ -1,9 +1,5 @@
 package com.example.collegeapp.profile;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,18 +13,21 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import com.example.collegeapp.R;
 import com.example.collegeapp.authentication.LoginActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Objects;
+
 public class UpdateEmailActivity extends AppCompatActivity {
     private FirebaseAuth authProfile;
-    private FirebaseUser firebaseUser;
     ProgressBar progressBar;
     private TextView textViewAuthenticated;
     private String userOldEmail,userNewEmail,userPwd;
@@ -41,7 +40,7 @@ public class UpdateEmailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_email);
-        getSupportActionBar().setTitle("Update Email");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Update Email");
 
         progressBar=findViewById(R.id.progressBar);
         editTextPwd=findViewById(R.id.editText_update_email_verify_password);
@@ -53,10 +52,11 @@ public class UpdateEmailActivity extends AppCompatActivity {
         editTextNewEmail.setEnabled(false);
 
         authProfile=FirebaseAuth.getInstance();
-        firebaseUser=authProfile.getCurrentUser();
+        FirebaseUser firebaseUser = authProfile.getCurrentUser();
 
         //Set old email id on textView
-        userOldEmail=firebaseUser.getEmail();
+        assert firebaseUser != null;
+        userOldEmail= firebaseUser.getEmail();
         TextView textViewOldEmail=findViewById(R.id.textView_update_email_old);
         textViewOldEmail.setText(userOldEmail);
 
@@ -71,102 +71,90 @@ public class UpdateEmailActivity extends AppCompatActivity {
     //Verify user before updating email
     private void reAuthenticate(FirebaseUser firebaseUser) {
         Button buttonVerifyUser=findViewById(R.id.button_authenticate_user);
-        buttonVerifyUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        buttonVerifyUser.setOnClickListener(view -> {
 
-                //Obtain password for authentication
-                userPwd=editTextPwd.getText().toString();
+            //Obtain password for authentication
+            userPwd=editTextPwd.getText().toString();
 
-                if(TextUtils.isEmpty(userPwd)){
-                    Toast.makeText(UpdateEmailActivity.this,"Password is needed to continue",Toast.LENGTH_LONG).show();
-                    editTextPwd.setError("Please enter your password for authentication");
-                    editTextPwd.requestFocus();
-                }else {
-                    progressBar.setVisibility(View.VISIBLE);
+            if(TextUtils.isEmpty(userPwd)){
+                Toast.makeText(UpdateEmailActivity.this,"Password is needed to continue",Toast.LENGTH_LONG).show();
+                editTextPwd.setError("Please enter your password for authentication");
+                editTextPwd.requestFocus();
+            }else {
+                progressBar.setVisibility(View.VISIBLE);
 
-                    AuthCredential credential= EmailAuthProvider.getCredential(userOldEmail,userPwd);
+                AuthCredential credential= EmailAuthProvider.getCredential(userOldEmail,userPwd);
 
-                    firebaseUser.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
-                                progressBar.setVisibility(View.GONE);
-                                Toast.makeText(UpdateEmailActivity.this,"Password has been verified"+"You can update email now",Toast.LENGTH_LONG).show();
+                firebaseUser.reauthenticate(credential).addOnCompleteListener(task -> {
+                    if(task.isSuccessful()){
+                        progressBar.setVisibility(View.GONE);
+                        Toast.makeText(UpdateEmailActivity.this,"Password has been verified"+"You can update email now",Toast.LENGTH_LONG).show();
 
-                                //set text view to show that user is authenticated
-                                textViewAuthenticated.setText("You are authenticated .You can update your email now");
+                        //set text view to show that user is authenticated
+                        textViewAuthenticated.setText(R.string.authenticated);
 
-                                editTextNewEmail.setEnabled(true);
-                                editTextPwd.setEnabled(false);
-                                buttonVerifyUser.setEnabled(false);
-                                buttonUpdateEmail.setEnabled(true);
+                        editTextNewEmail.setEnabled(true);
+                        editTextPwd.setEnabled(false);
+                        buttonVerifyUser.setEnabled(false);
+                        buttonUpdateEmail.setEnabled(true);
 
-                                //
-                                buttonUpdateEmail.setBackgroundTintList(ContextCompat.getColorStateList(UpdateEmailActivity.this,
-                                        R.color.dark_green));
-                                buttonUpdateEmail.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        userNewEmail=editTextNewEmail.getText().toString();
-                                        if(TextUtils.isEmpty(userNewEmail)){
-                                            Toast.makeText(UpdateEmailActivity.this,"New Email is required",Toast.LENGTH_LONG).show();
-                                            editTextNewEmail.setError("Please enter new email");
-                                            editTextNewEmail.requestFocus();
+                        //
+                        buttonUpdateEmail.setBackgroundTintList(ContextCompat.getColorStateList(UpdateEmailActivity.this,
+                                R.color.dark_green));
+                        buttonUpdateEmail.setOnClickListener(view1 -> {
+                            userNewEmail=editTextNewEmail.getText().toString();
+                            if(TextUtils.isEmpty(userNewEmail)){
+                                Toast.makeText(UpdateEmailActivity.this,"New Email is required",Toast.LENGTH_LONG).show();
+                                editTextNewEmail.setError("Please enter new email");
+                                editTextNewEmail.requestFocus();
 
-                                        } else if (!Patterns.EMAIL_ADDRESS.matcher(userNewEmail).matches()) {
-                                            Toast.makeText(UpdateEmailActivity.this,"Please enter valid email",Toast.LENGTH_LONG).show();
-                                            editTextNewEmail.setError("Please provide valid email");
-                                            editTextNewEmail.requestFocus();
+                            } else if (!Patterns.EMAIL_ADDRESS.matcher(userNewEmail).matches()) {
+                                Toast.makeText(UpdateEmailActivity.this,"Please enter valid email",Toast.LENGTH_LONG).show();
+                                editTextNewEmail.setError("Please provide valid email");
+                                editTextNewEmail.requestFocus();
 
 
-                                        } else if (userOldEmail.matches(userNewEmail)) {
-                                            Toast.makeText(UpdateEmailActivity.this,"New Email cannot be same as old Email",Toast.LENGTH_LONG).show();
-                                            editTextNewEmail.setError("Please enter new email");
-                                            editTextNewEmail.requestFocus();
+                            } else if (userOldEmail.matches(userNewEmail)) {
+                                Toast.makeText(UpdateEmailActivity.this,"New Email cannot be same as old Email",Toast.LENGTH_LONG).show();
+                                editTextNewEmail.setError("Please enter new email");
+                                editTextNewEmail.requestFocus();
 
 
-                                        }else{
-                                            progressBar.setVisibility(View.VISIBLE);
-                                            updateEmail(firebaseUser);
-                                        }
-                                    }
-                                });
                             }else{
-                                try{
-                                    throw  task.getException();
-                                }catch (Exception e){
-                                    Toast.makeText(UpdateEmailActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
-                                }
+                                progressBar.setVisibility(View.VISIBLE);
+                                updateEmail(firebaseUser);
                             }
+                        });
+                    }else{
+                        try{
+                            throw Objects.requireNonNull(task.getException());
+                        }catch (Exception e){
+                            Toast.makeText(UpdateEmailActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
                         }
-                    });
-                }
+                    }
+                });
             }
         });
     }
 
     private void updateEmail(FirebaseUser firebaseUser) {
-        firebaseUser.updateEmail(userNewEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isComplete()){
-                    //verify email
-                    firebaseUser.sendEmailVerification();
-                    Toast.makeText(UpdateEmailActivity.this,"Email has been updated .Please verify your new Email",Toast.LENGTH_SHORT).show();
-                    Intent intent=new Intent(UpdateEmailActivity.this,UserProfileActivity.class);
-                    startActivity(intent);
-                    finish();
-                }else{
-                    try{
-                        throw task.getException();
-                    }catch (Exception e){
-                        Toast.makeText(UpdateEmailActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+        firebaseUser.updateEmail(userNewEmail).addOnCompleteListener(task -> {
+            if(task.isComplete()){
+                //verify email
+                firebaseUser.sendEmailVerification();
+                Toast.makeText(UpdateEmailActivity.this,"Email has been updated .Please verify your new Email",Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(UpdateEmailActivity.this,UserProfileActivity.class);
+                startActivity(intent);
+                finish();
+            }else{
+                try{
+                    throw Objects.requireNonNull(task.getException());
+                }catch (Exception e){
+                    Toast.makeText(UpdateEmailActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
 
-                    }
                 }
-                progressBar.setVisibility(View.GONE);
             }
+            progressBar.setVisibility(View.GONE);
         });
     }
 

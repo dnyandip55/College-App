@@ -77,5 +77,13 @@ The objective of the Department of Botany has been to impart quality education t
     <string name="user_display_picture">user display picture</string>
     <string name="update_email_u">UPDATE EMAIL</string>
     <string name="upload_pic_u">UPLOAD PROFILE PIC</string>
+    <string name="welcome">"Welcome "</string>
+    <string name="dob">DOB</string>
+    <string name="gender">Gender</string>
+    <string name="mobile">Mobile</string>
+    <string name="name">Name</string>
+    <string name="authenticated">You are authenticated .You can update your email now</string>
+    <string name="verified">You are authenticated/verified.You can delete your profile and related data now!</string>
+    <string name="authenticated1">You are authenticated/verified.You can change password now</string>
 
 </resources>

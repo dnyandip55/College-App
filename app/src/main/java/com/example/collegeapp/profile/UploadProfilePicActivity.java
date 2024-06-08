@@ -1,9 +1,5 @@
 package com.example.collegeapp.profile;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
@@ -17,18 +13,21 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.collegeapp.R;
 import com.example.collegeapp.authentication.LoginActivity;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
+
+import java.util.Objects;
 
 public class UploadProfilePicActivity extends AppCompatActivity {
     private ProgressBar progressBar;
@@ -43,7 +42,7 @@ public class UploadProfilePicActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_profile_pic);
-        getSupportActionBar().setTitle("Upload Profile Picture");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Upload Profile Picture");
         authProfile=FirebaseAuth.getInstance();
         firebaseUser =authProfile.getCurrentUser();
         storageReference= FirebaseStorage.getInstance().getReference("ProfilePic");
@@ -62,19 +61,11 @@ public class UploadProfilePicActivity extends AppCompatActivity {
                 .apply(RequestOptions.circleCropTransform())
                 .into(imageViewUploadPic);
 
-        buttonUploadPicChoose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openFileChooser();
-            }
-        });
+        buttonUploadPicChoose.setOnClickListener(view -> openFileChooser());
 
-        buttonUploadPic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                progressBar.setVisibility(View.VISIBLE);
-                uploadPic();
-            }
+        buttonUploadPic.setOnClickListener(view -> {
+            progressBar.setVisibility(View.VISIBLE);
+            uploadPic();
         });
 
     }
@@ -82,36 +73,24 @@ public class UploadProfilePicActivity extends AppCompatActivity {
     private void uploadPic() {
         if(uriImage!=null){
             // Save the image with uid of the currently logged user
-            StorageReference fileReference=storageReference.child(authProfile.getCurrentUser().getUid()+"/profilepic."+getFileExtension(uriImage));
+            StorageReference fileReference=storageReference.child(Objects.requireNonNull(authProfile.getCurrentUser()).getUid()+"/profilepic."+getFileExtension(uriImage));
 
             // Upload image to storage
-            fileReference.putFile(uriImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    fileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            Uri download=uri;
-                            firebaseUser=authProfile.getCurrentUser();
+            fileReference.putFile(uriImage).addOnSuccessListener(taskSnapshot -> {
+                fileReference.getDownloadUrl().addOnSuccessListener(uri -> {
+                    firebaseUser=authProfile.getCurrentUser();
 
-                            // Set the display image of the user after upload
-                            UserProfileChangeRequest profileUpdates=new UserProfileChangeRequest.Builder()
-                                    .setPhotoUri(download).build();
-                            firebaseUser.updateProfile(profileUpdates);
-                        }
-                    });
-                    progressBar.setVisibility(View.GONE);
-                    Toast.makeText(UploadProfilePicActivity.this,"Upload Successful",Toast.LENGTH_SHORT).show();
-                    Intent intent=new Intent(UploadProfilePicActivity.this, UserProfileActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(UploadProfilePicActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
-                }
-            });
+                    // Set the display image of the user after upload
+                    UserProfileChangeRequest profileUpdates=new UserProfileChangeRequest.Builder()
+                            .setPhotoUri(uri).build();
+                    firebaseUser.updateProfile(profileUpdates);
+                });
+                progressBar.setVisibility(View.GONE);
+                Toast.makeText(UploadProfilePicActivity.this,"Upload Successful",Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(UploadProfilePicActivity.this, UserProfileActivity.class);
+                startActivity(intent);
+                finish();
+            }).addOnFailureListener(e -> Toast.makeText(UploadProfilePicActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show());
         }else{
             progressBar.setVisibility(View.GONE);
             Toast.makeText(UploadProfilePicActivity.this,"No File Selected",Toast.LENGTH_SHORT).show();

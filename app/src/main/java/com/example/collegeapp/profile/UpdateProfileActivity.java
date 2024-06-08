@@ -1,8 +1,5 @@
 package com.example.collegeapp.profile;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,18 +8,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.collegeapp.R;
 import com.example.collegeapp.authentication.LoginActivity;
-import com.example.collegeapp.authentication.RegisterActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -32,7 +28,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.Calendar;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -48,7 +44,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile);
-        getSupportActionBar().setTitle("Update Profile ");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Update Profile ");
 
         progressBar = findViewById(R.id.progressBar);
         editTextUpdateName = findViewById(R.id.editText_update_profile_name);
@@ -60,58 +56,40 @@ public class UpdateProfileActivity extends AppCompatActivity {
         FirebaseUser firebaseUser = authProfile.getCurrentUser();
 
         //show profile
+        assert firebaseUser != null;
         showProfile(firebaseUser);
 
         //Upload Profile Pic
         Button buttonUploadProfilePic = findViewById(R.id.button_profile_upload_pic);
-        buttonUploadProfilePic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(UpdateProfileActivity.this, UploadProfilePicActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        buttonUploadProfilePic.setOnClickListener(view -> {
+            Intent intent = new Intent(UpdateProfileActivity.this, UploadProfilePicActivity.class);
+            startActivity(intent);
+            finish();
         });
 
         //Update Email
        Button buttonUpdateEmail = findViewById(R.id.button_profile_update_email);
-        buttonUpdateEmail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(UpdateProfileActivity.this, UpdateEmailActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        buttonUpdateEmail.setOnClickListener(view -> {
+            Intent intent = new Intent(UpdateProfileActivity.this, UpdateEmailActivity.class);
+            startActivity(intent);
+            finish();
         });
 
 
         // Setting up DatePicker on EditText for date of birth
-        editTextUpdateDob.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String[] textSADoB = textDob.split("/");
-                int day = Integer.parseInt(textSADoB[0]);
-                int month = Integer.parseInt(textSADoB[1]) - 1;
-                int year = Integer.parseInt(textSADoB[2]);
+        editTextUpdateDob.setOnClickListener(view -> {
+            String[] textSADoB = textDob.split("/");
+            int day = Integer.parseInt(textSADoB[0]);
+            int month = Integer.parseInt(textSADoB[1]) - 1;
+            int year = Integer.parseInt(textSADoB[2]);
 
-                DatePickerDialog picker = new DatePickerDialog(UpdateProfileActivity.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        editTextUpdateDob.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
-                    }
-                }, year, month, day);
-                picker.show();
-            }
+            DatePickerDialog picker = new DatePickerDialog(UpdateProfileActivity.this, (view1, year1, month1, dayOfMonth) -> editTextUpdateDob.setText(dayOfMonth + "/" + (month1 + 1) + "/" + year1), year, month, day);
+            picker.show();
         });
 
         //Update Profile
         Button buttonUpdateProfile = findViewById(R.id.button_update_profile);
-        buttonUpdateProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                updateProfile(firebaseUser);
-            }
-        });
+        buttonUpdateProfile.setOnClickListener(view -> updateProfile(firebaseUser));
     }
 
     //Update profile
@@ -169,30 +147,27 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
             progressBar.setVisibility(View.VISIBLE);
 
-            referenceProfile.child(userID).setValue(writeUserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()) {
-                        //setting new display name
-                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(textFullName).build();
-                        firebaseUser.updateProfile(profileUpdates);
+            referenceProfile.child(userID).setValue(writeUserDetails).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    //setting new display name
+                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(textFullName).build();
+                    firebaseUser.updateProfile(profileUpdates);
 
-                        Toast.makeText(UpdateProfileActivity.this, "Update Successful !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UpdateProfileActivity.this, "Update Successful !", Toast.LENGTH_SHORT).show();
 
-                        //Stop user from returning to UpdateProfileActivity on pressing back button and close activity
-                        Intent intent = new Intent(UpdateProfileActivity.this, UserProfileActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        try {
-                            throw task.getException();
-                        } catch (Exception e) {
-                            Toast.makeText(UpdateProfileActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                        }
+                    //Stop user from returning to UpdateProfileActivity on pressing back button and close activity
+                    Intent intent = new Intent(UpdateProfileActivity.this, UserProfileActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    try {
+                        throw Objects.requireNonNull(task.getException());
+                    } catch (Exception e) {
+                        Toast.makeText(UpdateProfileActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                     }
-                    progressBar.setVisibility(View.GONE);
                 }
+                progressBar.setVisibility(View.GONE);
             });
         }
     }
@@ -201,7 +176,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
     private void showProfile(FirebaseUser firebaseUser) {
         String userIdOfRegistered = firebaseUser.getUid();
 
-        //Extracting User Refernce from Database for "Registered Users"
+        //Extracting User Reference from Database for "Registered Users"
         DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("users");
         progressBar.setVisibility(View.VISIBLE);
         referenceProfile.child(userIdOfRegistered).addListenerForSingleValueEvent(new ValueEventListener() {

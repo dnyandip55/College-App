@@ -1,8 +1,5 @@
 package com.example.collegeapp.authentication;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,21 +7,22 @@ import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.collegeapp.R;
-import com.example.collegeapp.profile.UserProfileActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 public class RegisterActivity extends AppCompatActivity {
     private EditText editTextRegisterFullName, editTextRegisterEmail, editTextRegisterDoB, editTextRegisterMobile,
@@ -37,7 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        getSupportActionBar().setTitle("Register");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Register");
         Toast.makeText(RegisterActivity.this, "You can register now " , Toast.LENGTH_SHORT).show();
 
 
@@ -51,41 +49,30 @@ public class RegisterActivity extends AppCompatActivity {
         radioGroupRegisterGender.clearCheck();
 
         // Setting up DatePicker on EditText for date of birth
-        editTextRegisterDoB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Calendar calendar = Calendar.getInstance();
-                int day = calendar.get(Calendar.DAY_OF_MONTH);
-                int month = calendar.get(Calendar.MONTH);
-                int year = calendar.get(Calendar.YEAR);
+        editTextRegisterDoB.setOnClickListener(view -> {
+            final Calendar calendar = Calendar.getInstance();
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+            int month = calendar.get(Calendar.MONTH);
+            int year = calendar.get(Calendar.YEAR);
 
-                picker = new DatePickerDialog(RegisterActivity.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        editTextRegisterDoB.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
-                    }
-                }, year, month, day);
-                picker.show();
-            }
+            picker = new DatePickerDialog(RegisterActivity.this, (view1, year1, month1, dayOfMonth) -> editTextRegisterDoB.setText(dayOfMonth + "/" + (month1 + 1) + "/" + year1), year, month, day);
+            picker.show();
         });
 
         Button buttonRegister = findViewById(R.id.button_register);
-        buttonRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String fullName = editTextRegisterFullName.getText().toString();
-                String email = editTextRegisterEmail.getText().toString();
-                String dob = editTextRegisterDoB.getText().toString();
-                String mobile = editTextRegisterMobile.getText().toString();
-                String password = editTextRegisterPwd.getText().toString();
-                String gender = ((RadioButton) findViewById(radioGroupRegisterGender.getCheckedRadioButtonId())).getText().toString();
+        buttonRegister.setOnClickListener(view -> {
+            String fullName = editTextRegisterFullName.getText().toString();
+            String email = editTextRegisterEmail.getText().toString();
+            String dob = editTextRegisterDoB.getText().toString();
+            String mobile = editTextRegisterMobile.getText().toString();
+            String password = editTextRegisterPwd.getText().toString();
+            String gender = ((RadioButton) findViewById(radioGroupRegisterGender.getCheckedRadioButtonId())).getText().toString();
 
-                
-                
-                if (validateInputs(fullName, email, dob, mobile, password, gender)) {
-                    progressBar.setVisibility(View.VISIBLE);
-                    registerUser(fullName, email, dob, mobile, password, gender);
-                }
+
+
+            if (validateInputs(fullName, email, dob, mobile, password, gender)) {
+                progressBar.setVisibility(View.VISIBLE);
+                registerUser(fullName, email, dob, mobile, password, gender);
             }
         });
     }
@@ -156,7 +143,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                             // Proceed to send verification email and navigate to user profile
                             firebaseUser.sendEmailVerification();
-                            Toast.makeText(RegisterActivity.this, "User registration Succesfull " , Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "User registration Successful " , Toast.LENGTH_SHORT).show();
 
                             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -166,7 +153,7 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     } else {
                         // User registration failed
-                        Toast.makeText(RegisterActivity.this, "User registration failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "User registration failed: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                         progressBar.setVisibility(View.GONE);
                     }
                 });

@@ -2,6 +2,7 @@ package com.example.collegeapp.profile;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -27,18 +28,24 @@ import com.google.firebase.database.ValueEventListener;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.util.Objects;
+
 public class UserProfileActivity extends AppCompatActivity {
     private TextView textViewWelcome, textViewFullName, textViewEmail, textViewDoB, textViewGender, textViewMobile;
     private ProgressBar progressBar;
     private ImageView imageView;
 
     private FirebaseAuth authProfile;
+    private SwipeRefreshLayout swipeContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
-        getSupportActionBar().setTitle("Profile");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Profile");
+
+
+        swipeToRefresh();
 
         // Initialize FirebaseAuth
         authProfile = FirebaseAuth.getInstance();
@@ -56,12 +63,9 @@ public class UserProfileActivity extends AppCompatActivity {
 
         // Set onclick listener on imageView to open UploadProfilePicActivity
         imageView=findViewById(R.id.imageView_profile_dp);
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(UserProfileActivity.this,UploadProfilePicActivity.class);
-                startActivity(intent);
-            }
+        imageView.setOnClickListener(view -> {
+            Intent intent=new Intent(UserProfileActivity.this,UploadProfilePicActivity.class);
+            startActivity(intent);
         });
 
         // Check if user is authenticated
@@ -76,6 +80,20 @@ public class UserProfileActivity extends AppCompatActivity {
         }
     }
 
+    private void swipeToRefresh() {
+        swipeContainer=findViewById(R.id.swipeContainer);
+
+        swipeContainer.setOnRefreshListener(() -> {
+            //Code to refresh goes here
+            startActivity(getIntent());
+            finish();
+            overridePendingTransition(0,0);
+            swipeContainer.setRefreshing(false);
+        });
+
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light);
+    }
+
     private void showUserProfile(FirebaseUser firebaseUser) {
         String userId = firebaseUser.getUid();
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(userId);
@@ -87,7 +105,7 @@ public class UserProfileActivity extends AppCompatActivity {
 
                     if (user != null) {
                         // Populate TextViews with user details
-                        textViewWelcome.setText("Welcome ");
+                        textViewWelcome.setText(R.string.welcome);
                         textViewFullName.setText(user.getFullName());
                         textViewEmail.setText(user.getEmail());
                         textViewDoB.setText(user.getDob());

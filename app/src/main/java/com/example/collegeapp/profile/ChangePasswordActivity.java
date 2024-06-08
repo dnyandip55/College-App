@@ -1,10 +1,5 @@
 package com.example.collegeapp.profile;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,18 +12,22 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import com.example.collegeapp.R;
 import com.example.collegeapp.authentication.LoginActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Objects;
+
 public class ChangePasswordActivity extends AppCompatActivity {
     private FirebaseAuth authProfile;
-    private EditText editTextPwdCurr,editTextPwdNew,getEditTextPwdConfirmNew;
+    private EditText editTextPwdCurr,editTextPwdNew;
     private TextView textViewAuthenticated;
     private Button buttonChangePwd,buttonReAuthenticate;
     private ProgressBar progressBar;
@@ -38,7 +37,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
-        getSupportActionBar().setTitle("Change Password");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Change Password");
 
         editTextPwdNew=findViewById(R.id.editText_change_pwd_new);
         editTextPwdCurr=findViewById(R.id.editText_change_pwd_current);
@@ -54,6 +53,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         authProfile= FirebaseAuth.getInstance();
         FirebaseUser firebaseUser=authProfile.getCurrentUser();
 
+        assert firebaseUser != null;
         if(firebaseUser.equals("")){
             Toast.makeText(ChangePasswordActivity.this,"Something went wrong! User's details not available",Toast.LENGTH_SHORT).show();
 
@@ -68,60 +68,49 @@ public class ChangePasswordActivity extends AppCompatActivity {
     }
 
     private void reAuthenticateUser(FirebaseUser firebaseUser) {
-        buttonReAuthenticate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                userPwdCurr=editTextPwdCurr.getText().toString();
+        buttonReAuthenticate.setOnClickListener(view -> {
+            userPwdCurr=editTextPwdCurr.getText().toString();
 
-                if(TextUtils.isEmpty(userPwdCurr)){
-                    Toast.makeText(ChangePasswordActivity.this,"Password is needed",Toast.LENGTH_SHORT).show();
-                    editTextPwdCurr.setError("Please enter your current password to authenticate");
-                    editTextPwdCurr.requestFocus();
+            if(TextUtils.isEmpty(userPwdCurr)){
+                Toast.makeText(ChangePasswordActivity.this,"Password is needed",Toast.LENGTH_SHORT).show();
+                editTextPwdCurr.setError("Please enter your current password to authenticate");
+                editTextPwdCurr.requestFocus();
 
 
-                }else{
-                    progressBar.setVisibility(View.VISIBLE);
-                    //Authenticate User now
-                    AuthCredential credential= EmailAuthProvider.getCredential(firebaseUser.getEmail(),userPwdCurr);
-                    firebaseUser.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
-                                progressBar.setVisibility(View.GONE);
-                                
-                                //Disable editText for current passwword .Enable EditText for new password 
-                                editTextPwdCurr.setEnabled(false);
-                                editTextPwdNew.setEnabled(true);
-                                
-                                //Enable change Pwd Button . Disable Authentication Button
-                                buttonReAuthenticate.setEnabled(false);
-                                buttonChangePwd.setEnabled(true);
-                                
-                                //set TextView to show user is authenticated 
-                                textViewAuthenticated.setText("You are authenticated/verified"+"You can change password now");
-                                Toast.makeText(ChangePasswordActivity.this,"Password has been verified"+"Change password now",
-                                        Toast.LENGTH_SHORT).show();
-                                
-                                buttonChangePwd.setBackgroundTintList(ContextCompat.getColorStateList(
-                                        ChangePasswordActivity.this,R.color.dark_green));
-                                
-                                buttonChangePwd.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        changePwd(firebaseUser);
-                                    }
-                                });
-                            }else{
-                                try{
-                                    throw task.getException();
-                                }catch (Exception e){
-                                    Toast.makeText(ChangePasswordActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                            progressBar.setVisibility(View.GONE );
+            }else{
+                progressBar.setVisibility(View.VISIBLE);
+                //Authenticate User now
+                AuthCredential credential= EmailAuthProvider.getCredential(Objects.requireNonNull(firebaseUser.getEmail()),userPwdCurr);
+                firebaseUser.reauthenticate(credential).addOnCompleteListener(task -> {
+                    if(task.isSuccessful()){
+                        progressBar.setVisibility(View.GONE);
+
+                        //Disable editText for current passwword .Enable EditText for new password
+                        editTextPwdCurr.setEnabled(false);
+                        editTextPwdNew.setEnabled(true);
+
+                        //Enable change Pwd Button . Disable Authentication Button
+                        buttonReAuthenticate.setEnabled(false);
+                        buttonChangePwd.setEnabled(true);
+
+                        //set TextView to show user is authenticated
+                        textViewAuthenticated.setText(getString(R.string.authenticated1));
+                        Toast.makeText(ChangePasswordActivity.this,"Password has been verified"+"Change password now",
+                                Toast.LENGTH_SHORT).show();
+
+                        buttonChangePwd.setBackgroundTintList(ContextCompat.getColorStateList(
+                                ChangePasswordActivity.this,R.color.dark_green));
+
+                        buttonChangePwd.setOnClickListener(view1 -> changePwd(firebaseUser));
+                    }else{
+                        try{
+                            throw Objects.requireNonNull(task.getException());
+                        }catch (Exception e){
+                            Toast.makeText(ChangePasswordActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
                         }
-                    });
-                }
+                    }
+                    progressBar.setVisibility(View.GONE );
+                });
             }
         });
     }
@@ -140,25 +129,22 @@ public class ChangePasswordActivity extends AppCompatActivity {
             editTextPwdNew.requestFocus();
         }else{
             progressBar.setVisibility(View.VISIBLE);
-            firebaseUser.updatePassword(userPwdNew).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if(task.isSuccessful()){
-                        Toast.makeText(ChangePasswordActivity.this,"Password has been changed",Toast.LENGTH_SHORT).show();
+            firebaseUser.updatePassword(userPwdNew).addOnCompleteListener(task -> {
+                if(task.isSuccessful()){
+                    Toast.makeText(ChangePasswordActivity.this,"Password has been changed",Toast.LENGTH_SHORT).show();
 
-                        Intent intent=new Intent(ChangePasswordActivity.this,UserProfileActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }else{
-                        try{
-                            throw task.getException();
-                        }catch (Exception e){
-                            Toast.makeText(ChangePasswordActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(ChangePasswordActivity.this,UserProfileActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else{
+                    try{
+                        throw Objects.requireNonNull(task.getException());
+                    }catch (Exception e){
+                        Toast.makeText(ChangePasswordActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
 
-                        }
                     }
-                    progressBar.setVisibility(View.GONE);
                 }
+                progressBar.setVisibility(View.GONE);
             });
         }
 
